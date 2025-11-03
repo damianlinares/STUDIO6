@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio6 - The Next Generation of Sound</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.08em;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 5px;
+        }
+
+        .menu-btn span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 12vw, 7rem);
+            font-weight: 800;
+            margin-bottom: 2rem;
+            letter-spacing: 0.08em;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+            color: #aaa;
+            max-width: 650px;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        .btn-primary {
+            padding: 1.2rem 3rem;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #aaa;
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: #aaa;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Genres Section */
+        .genres {
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .genre-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .genre-card {
+            aspect-ratio: 16/9;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            background: linear-gradient(135deg, rgba(120,120,120,0.2), rgba(60,60,60,0.2));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .genre-card:hover {
+            transform: scale(1.03);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .genre-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        }
+
+        .genre-card h3 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            padding: 2rem;
+            font-size: 2rem;
+            font-weight: 800;
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        /* Submit Section */
+        .submit-section {
+            padding: 6rem 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .submit-section h2 {
+            font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+        }
+
+        .submit-section p {
+            color: #aaa;
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .input-field {
+            flex: 1;
+            min-width: 250px;
+            padding: 1.2rem 1.8rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: #fff;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .input-field::placeholder {
+            color: #666;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.3rem;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.2rem;
+            color: #666;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #aaa;
+            text-decoration: none;
+            margin-bottom: 0.85rem;
+            transition: color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-section a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 1.5rem;
+            }
+
+            .hero {
+                padding: 1.5rem;
+            }
+
+            .features, .genres, .submit-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .feature-grid, .genre-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .input-field {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">STUDIO6</div>
+        <button class="menu-btn" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>STUDIO 6</h1>
+        <p>The next generation of sound, redefined. Powered by AI, driven by creativity.</p>
+        <button class="btn-primary">Explore the Studio</button>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">Enter the Studio</h2>
+        <p class="section-subtitle">Harness cutting-edge AI to bring your musical ideas to life.</p>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎵</div>
+                <h3>AI Composition</h3>
+                <p>Generate melodies, harmonies, and rhythms in any genre. Break through creative blocks with an infinite well of inspiration.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎚️</div>
+                <h3>Automated Mastering</h3>
+                <p>Give your tracks a professional, polished sound with our AI-powered mastering engine. Loud, clear, and ready for streaming.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎧</div>
+                <h3>Studio Quality</h3>
+                <p>Professional-grade audio processing that rivals the best recording studios in the world, accessible from anywhere.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Genres Section -->
+    <section class="genres">
+        <h2 class="section-title">Our Sound</h2>
+        <p class="section-subtitle">Exploring the core genres that define the Studio6 experience.</p>
+        
+        <div class="genre-cards">
+            <div class="genre-card">
+                <h3>TRAP</h3>
+            </div>
+            <div class="genre-card">
+                <h3>HIP HOP</h3>
+            </div>
+            <div class="genre-card">
+                <h3>R&B</h3>
+            </div>
+            <div class="genre-card">
+                <h3>TECHNO</h3>
+            </div>
+            <div class="genre-card">
+                <h3>HARD TECHNO</h3>
+            </div>
+            <div class="genre-card">
+                <h3>PSYTRANCE</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Submit Section -->
+    <section class="submit-section">
+        <h2>Join the Label</h2>
+        <p>Think you have what it takes? Submit your demo and our AI A&R team will review your track. We're always listening for the future of sound.</p>
+        
+        <div class="input-group">
+            <input type="text" class="input-field" placeholder="Paste a link to your track (SoundCloud, YouTube...)">
+        </div>
+        
+        <button class="btn-submit">Submit Track</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Links</h4>
+                <a href="#studio">Studio</a>
+                <a href="#genres">Genres</a>
+                <a href="#label">Label</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="#terms">Terms of Service</a>
+                <a href="#privacy">Privacy Policy</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>About</h4>
+                <a href="#about">About Studio6</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Studio6 AI. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
